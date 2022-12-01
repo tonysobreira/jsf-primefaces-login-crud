@@ -1,0 +1,46 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ul class="nav nav-list" style="padding-top: 15px;">
+		<li>
+			<em><h:outputText value="#{loginBean.loggedUser.name}" /></em>
+		</li>
+		
+		<li class="divider"></li>
+		<li>
+			<em><h:outputText value="#{msg['label.items']}" /></em>
+		</li>
+
+		<li class="#{empty param.active || param.active == 'list' ? 'active' : ''}">
+			<h:link outcome="listItems">
+				<h:outputText value="#{msg['menu.list']}" escape="false" />
+				<f:param name="active" value="list" />
+            </h:link>
+		</li>
+		<li class="#{param.active == 'add' ? 'active' : ''}">
+			<h:link outcome="addItem">
+				<h:outputText value="#{msg['menu.add']}" escape="false" />
+				<f:param name="active" value="add" />
+			</h:link>
+		</li>
+		<li class="divider"></li>
+		<li class="#{param.active == 'about' ? 'active' : ''}">
+			<h:link outcome="about">
+				<h:outputText value="#{msg['menu.about']}" escape="false" />
+				<f:param name="active" value="about" />
+			</h:link>
+		</li>
+		<li class="divider"></li>
+		<li>
+			<h:form>
+				<h:commandLink action="#{loginBean.logout}" value="Logout"></h:commandLink>
+			</h:form>
+		</li>
+		
+		
+	</ul>
+
+</ui:fragment>

@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>login</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:growl id="growl" showDetail="true" showSummary="true" life="5000" />
+		<h3><h:outputText value="#{msg['app.title']}" /></h3>
+		<h3>JSF Login Logout</h3>
+		<h:outputText value="Username" />
+		<h:inputText id="username" value="#{loginBean.name}"></h:inputText>
+		<h:message for="username"></h:message>
+		<br></br>
+		<br></br>
+
+		<h:outputText value="Password" />
+		<h:inputSecret id="password" value="#{loginBean.password}"></h:inputSecret>
+		<h:message for="password"></h:message>
+		<br></br>
+		<br></br>
+
+		<h:commandButton action="#{loginBean.validateUsernamePassword}"
+			value="Login"></h:commandButton>
+			
+		<br></br>
+		<br></br>
+			
+		<h3>Register</h3>
+		<h:outputText value="Username" />
+		<h:inputText id="username2" value="#{loginBean.name2}"></h:inputText>
+		<h:message for="username2"></h:message>
+		<br></br>
+		<br></br>
+		
+		<h:outputText value="Email" />
+		<h:inputText id="email2" value="#{loginBean.email2}"></h:inputText>
+		<h:message for="email2"></h:message>
+		<br></br>
+		<br></br>
+
+		<h:outputText value="Password" />
+		<h:inputSecret id="password2" value="#{loginBean.password2}"></h:inputSecret>
+		<h:message for="password2"></h:message>
+		<br></br>
+		<br></br>
+
+		<h:commandButton action="#{loginBean.registerUsernamePassword}" value="Register"></h:commandButton>
+			
+		<p:remoteCommand actionListener="#{sessionBean.start()}" autoRun="true" ></p:remoteCommand>
+	</h:form>
+</h:body>
+</html>

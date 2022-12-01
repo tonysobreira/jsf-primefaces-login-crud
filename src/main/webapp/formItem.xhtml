@@ -1,0 +1,97 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form styleClass="form-horizontal">
+		<fieldset>
+			<legend>
+				<h3>
+					<h:outputText value="#{msg['label.item']}" />
+					<small> <h:outputText value="#{subtitle}" /></small>
+				</h3>
+			</legend>
+			<div class="control-group">
+				<label class="control-label"><h:outputText
+						value="#{msg['label.item.name']}" /></label>
+				<div class="controls">
+					<h:inputText value="#{itemBean.item.name}"
+						label="#{msg['label.item.name']}" required="true"
+						styleClass="input-large">
+						<f:validateLength minimum="5" maximum="60" />
+					</h:inputText>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label"><h:outputText
+						value="#{msg['label.item.description']}" /></label>
+				<div class="controls">
+					<h:inputText value="#{itemBean.item.description}"
+						label="#{msg['label.item.description']}" required="true"
+						styleClass="input-large">
+						<f:validateLength minimum="5" maximum="100" />
+					</h:inputText>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label"><h:outputText
+						value="#{msg['label.item.quantity']}" /></label>
+				<div class="controls">
+					<h:inputText value="#{itemBean.item.quantity}"
+						label="#{msg['label.item.quantity']}" required="true"
+						styleClass="input-small">
+						<f:convertNumber />
+						<f:validateLongRange minimum="1" />
+					</h:inputText>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label"><h:outputText
+						value="#{msg['label.item.price']}" /></label>
+				<div class="controls">
+					<h:inputText value="#{itemBean.item.price}"
+						label="#{msg['label.item.price']}" required="true"
+						styleClass="input-small">
+						<f:convertNumber minFractionDigits="2" />
+						<f:validateDoubleRange minimum="1" />
+					</h:inputText>
+				</div>
+			</div>
+		</fieldset>
+
+		<div class="control-group">
+			<div class="controls">
+				<p:commandButton value="#{itemBean.item.id eq null ? msg['button.save'] : msg['button.update']}"
+					action="#{itemBean.save}" styleClass="btn btn-success" onclick="PF('dlg').show();" oncomplete="PF('dlg').hide();"
+					rendered="#{itemBean.item != null}" />
+				<p:button value="#{msg['button.cancel']}"
+					outcome="listItems" styleClass="btn" />
+				<p:commandButton value="#{msg['button.delete']}"
+					onclick="PF('confirmation').show();"
+					rendered="#{itemBean.item.id != null}" immediate="true"
+					styleClass="btn btn-danger" />
+			</div>
+		</div>
+		
+		<p:dialog id="dialog" header="#{msg['dialog.inexecution.title']}" widgetVar="dlg" dynamic="true" modal="true">  
+	    	<h:outputText value="#{msg['dialog.inexecution.wait']}" />  
+		</p:dialog>
+		
+		<p:confirmDialog id="confirmDialog" message="#{msg['delete.item.confirm']}"
+			header="#{msg['delete.item']}" severity="alert" widgetVar="confirmation">  
+	        <p:commandButton id="confirm" value="#{msg['confirm.yes']}" update="messages" 
+	        	oncomplete="PF('confirmation').hide();" action="#{itemBean.delete}" />  
+	        <p:commandButton id="decline" value="#{msg['confirm.no']}" 
+	        	onclick="PF('confirmation').hide();" type="button" />
+	    </p:confirmDialog>
+	
+		<p:messages id="messages" showDetail="false" closable="true">
+			<p:autoUpdate />
+		</p:messages>
+		<h:inputHidden value="#{itemBean.item.id}" />
+	</h:form>
+</ui:fragment>
