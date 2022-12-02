@@ -21,7 +21,7 @@
 	<application>
 		<!-- configuracoes do locale (i18n) -->
 		<locale-config>
-			<default-locale>us</default-locale>
+			<default-locale>pt_BR</default-locale>
 		</locale-config>
 
 		<resource-bundle>

@@ -2,7 +2,6 @@ package com.loginproject.repository;
 
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
@@ -12,36 +11,26 @@ import com.loginproject.model.AbstractEntity;
 
 public abstract class AbstractPersistence<T extends AbstractEntity, PK extends Number> {
 
-	@Inject
-	private EntityManager manager;
-
 	private Class<T> entityClass;
 
 	public AbstractPersistence(Class<T> entityClass) {
 		this.entityClass = entityClass;
 	}
+	
+	protected abstract EntityManager getEntityManager();
 
 	public T save(T e) {
 		if (e.getId() != null) {
-			this.manager.getTransaction().begin();
 			T t = getEntityManager().merge(e);
-			this.manager.flush();
-			this.manager.getTransaction().commit();
 			return t;
 		} else {
-			this.manager.getTransaction().begin();
 			getEntityManager().persist(e);
-			this.manager.flush();
-			this.manager.getTransaction().commit();
 			return e;
 		}
 	}
 
 	public void remove(T entity) {
-		this.manager.getTransaction().begin();
 		getEntityManager().remove(getEntityManager().merge(entity));
-		this.manager.flush();
-		this.manager.getTransaction().commit();
 	}
 
 	public T find(PK id) {
@@ -70,7 +59,5 @@ public abstract class AbstractPersistence<T extends AbstractEntity, PK extends N
 		Query q = getEntityManager().createQuery(cq);
 		return ((Long) q.getSingleResult()).intValue();
 	}
-
-	protected abstract EntityManager getEntityManager();
 
 }

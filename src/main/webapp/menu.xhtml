@@ -6,7 +6,9 @@
 
 	<ul class="nav nav-list" style="padding-top: 15px;">
 		<li>
-			<em><h:outputText value="#{loginBean.loggedUser.name}" /></em>
+			<h:link outcome="admin">
+				<em><h:outputText value="#{loginBean.loggedUser.name}" /></em>
+			</h:link>
 		</li>
 		
 		<li class="divider"></li>

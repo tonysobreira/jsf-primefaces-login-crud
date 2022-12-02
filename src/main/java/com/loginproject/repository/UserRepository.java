@@ -32,4 +32,17 @@ public class UserRepository extends AbstractPersistence<Users, Long> {
 		return (Users) query.getSingleResult();
 	}
 
+	public Users findUserById(Long id) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(" SELECT u FROM Users u ");
+		sql.append(" LEFT JOIN FETCH u.items i ");
+		sql.append(" WHERE u.id = :id");
+		
+		Query query = manager.createQuery(sql.toString());
+		
+		query.setParameter("id", id);
+		
+		return (Users) query.getSingleResult();
+	}
+
 }

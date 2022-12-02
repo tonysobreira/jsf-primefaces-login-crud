@@ -1,4 +1,4 @@
-package com.loginproject.util;
+package com.loginproject.util.jpa;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
@@ -11,7 +11,6 @@ import javax.persistence.Persistence;
 @ApplicationScoped
 public class EntityManagerProducer {
 
-//	@PersistenceUnit(unitName = "LoginPU")
 	private EntityManagerFactory factory;
 	
 	public EntityManagerProducer() {

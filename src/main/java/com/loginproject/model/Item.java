@@ -2,8 +2,8 @@ package com.loginproject.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,9 +33,9 @@ public class Item implements AbstractEntity, Serializable {
 	@NotNull
 	private Double price;
 
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "id")
-//	private Users user;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id")
+	private Users user;
 
 	public Long getId() {
 		return id;
@@ -77,12 +77,12 @@ public class Item implements AbstractEntity, Serializable {
 		this.price = price;
 	}
 
-//	public Users getUser() {
-//		return user;
-//	}
-//
-//	public void setUser(Users user) {
-//		this.user = user;
-//	}
+	public Users getUser() {
+		return user;
+	}
+
+	public void setUser(Users user) {
+		this.user = user;
+	}
 
 }

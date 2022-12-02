@@ -3,6 +3,7 @@ package com.loginproject.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,8 +34,8 @@ public class Users implements AbstractEntity, Serializable {
 	@Column(nullable = true, length = 60)
 	private String password;
 
-//	@OneToMany(mappedBy = "user")
-//	private List<Item> items;
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Item> items;
 
 	public Users() {
 	}
@@ -78,17 +79,17 @@ public class Users implements AbstractEntity, Serializable {
 		this.password = password;
 	}
 
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
+
 	@Override
 	public String toString() {
 		return "Users [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + "]";
 	}
-
-//	public List<Item> getItems() {
-//		return items;
-//	}
-//
-//	public void setItems(List<Item> items) {
-//		this.items = items;
-//	}
 
 }

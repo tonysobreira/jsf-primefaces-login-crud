@@ -13,6 +13,7 @@ import javax.inject.Named;
 
 import com.loginproject.model.Item;
 import com.loginproject.service.ItemService;
+import com.loginproject.service.UserService;
 
 @Named
 @RequestScoped
@@ -32,7 +33,8 @@ public class ItemBean implements Serializable {
 	public String save() {
 		
 		try {
-			itemService.save(item);
+//			itemService.save(item);
+			itemService.saveItemUser(item);
 		} catch(Exception ex) {
 			addMessage(getMessageFromI18N("msg.error.save.item"), ex.getMessage());
 			return "";
@@ -82,7 +84,9 @@ public class ItemBean implements Serializable {
 	public List<Item> getItems() {
 		
 		if (items == null) {
-			items = itemService.findAll();
+//			items = itemService.findAll();
+//			items = itemService.findAllByUser();
+			items = itemService.findItemsByUser();
 		}
 		
 		return items;
